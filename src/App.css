@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+ 
+.bian {
+  background-color: black;
+  height: 55px;
+}
+
+.menu{
+  background-color: gray;
+  height: 68px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.menuitem{
+  
+  font-size: 20px;
+  
+  width: 120px;
+}

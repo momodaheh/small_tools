@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
+const menuitems = [
+  {
+    name: 'buff低价提醒',
+    value: 1,
+  },
+  {
+    name: '自动生成图标',
+    value: 2,
+  },
+  {
+    name: '以撒的结合重生图层攻略',
+    value: 3,
+  },
+];
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="bian"></div>
+      <div className="menu">
+        {menuitems.map((item, index) => {
+            return <div className="menuitem" key={index}>
+              {item.name}
+            </div>
+        })}
+        </div>
+      <div className="bian"></div>
     </div>
   );
 }
