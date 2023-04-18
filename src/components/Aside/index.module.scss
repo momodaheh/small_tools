@@ -1,0 +1,32 @@
+
+
+.menu{
+  background-color: #232222;
+  width: 160px;
+  height:calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 2px solid #3a362d;
+  padding-top: 60px;
+
+}
+
+.menuitem{
+  font-size: 18px;
+  font-weight: 700;
+  color: #d4d4d4;
+  width: 120px;
+  margin-top: 15px;
+}
+
+.menuitem:hover{
+  color:rgb(197, 205, 50)
+}
+
+.bian {
+  width: 160px;
+  background-image:url("../../../src/assets/img/bian.jpg") ;
+  height: 25px;
+  border-right: 2px solid #3a362d;
+}

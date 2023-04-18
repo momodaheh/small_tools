@@ -1,0 +1,59 @@
+.all {
+    height:100vh;
+  }
+  
+  .bian {
+    background-image:url("../../../src/assets/img/bian.jpg") ;
+    height: 55px;
+    
+  }
+  
+  .logo{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    z-index: 1;
+    margin-left: 135px;
+    padding-top: 20px;
+    border-radius: 15%;
+  }
+  
+  .menu{
+    background-color: #232222;
+    width: 180px;
+    /* height:600px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 2px solid #3a362d;
+    padding-top: 60px;
+  
+  }
+  
+  .menuitem{
+    font-size: 18px;
+    font-weight: 700;
+    color: #d4d4d4;
+    width: 120px;
+    margin-top: 15px;
+  }
+  
+  .menuitem:hover{
+    color:rgb(197, 205, 50)
+  }
+  
+  .center{
+    height:calc(100vh - 110px);
+    // height: 580px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .content{
+    width: calc(100vw - 120px);
+    background-image: url(../../..//src/assets/img/Bg2.jpg);
+    padding-top: 60px;
+    background-position: center center;  /* 设置背景图片居中 */
+    background-repeat: no-repeat;        /* 禁止背景图片重复 */
+    background-size: cover;              /* 将背景图片等比例缩放来填充尺寸不足的元素区域*/
+  }

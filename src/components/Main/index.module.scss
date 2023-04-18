@@ -1,0 +1,22 @@
+
+  
+  .content{
+    width: calc(100vw - 160px);
+    height:calc(100vh - 55px);
+    background-image: url(../../..//src/assets/img/Bg2.jpg);
+    background-position: center center;  /* 设置背景图片居中 */
+    background-repeat: no-repeat;        /* 禁止背景图片重复 */
+    background-size: cover;              /* 将背景图片等比例缩放来填充尺寸不足的元素区域*/
+  }
+
+  .middle{
+    color: #d2d2d2;
+    border-width: 0 4px 4px;
+    border-color: #1a1413;
+    border-left-style: dashed;
+    border-right-style: dashed;
+    background-color: #2c2925;
+    width: calc(100vw - 460px);
+    height:calc(100vh - 55px);
+    margin: auto;
+  }
