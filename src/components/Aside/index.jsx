@@ -1,20 +1,22 @@
 import React from "react";
 import styles from "./index.module.scss";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Aside() {
+  const navigate = useNavigate();
+  const go = (value) => {
+    navigate(value)
+  }
   return (
     <div>
       <div className={styles.menu}>
         {menuitems.map((item, index) => {
           return (
             <div className={styles.menuitem} key={index}>
-              {item.name}
+              <span onClick={() => go(item.value)}>{item.name}</span>
             </div>
           );
         })}
-      </div>
-      <div className={styles.bian}>
-
       </div>
     </div>
   );
@@ -23,7 +25,7 @@ export default function Aside() {
 const menuitems = [
   {
     name: "buff低价提醒",
-    value: 1,
+    value: "/home/page",
   },
   {
     name: "自动生成图标",
