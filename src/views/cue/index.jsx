@@ -66,9 +66,11 @@ export default function Cue() {
         : goods.filter((item) => item.type === value)
     );
   };
+
+  
   return (
     <div>
-      <div className={styles.top_select}>
+      <div className={styles.top_select} id="top">
         <span>csgobuff低价提醒</span>
         <Select
           defaultValue="all"
@@ -79,7 +81,7 @@ export default function Cue() {
           options={type}
         />
       </div>
-      <div>
+      {/* <div className={styles.middle}> */}
         <List
           dataSource={data}
           renderItem={(item) => (
@@ -88,7 +90,8 @@ export default function Cue() {
             </List.Item>
           )}
         />
-      </div>
+        <div className={styles.back} >top</div>
+      {/* </div> */}
     </div>
   );
 }

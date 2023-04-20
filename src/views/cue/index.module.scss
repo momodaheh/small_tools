@@ -12,10 +12,16 @@
     font-size: 22px;
     font-weight: bold;
 }
+// .middle{
+//     display: flex;
+//     flex-direction: row;
+//     margin: auto;
+//     justify-content: center;
+//     min-width: 720px;
+// }
 .itemStyle{
     display: flex;
     flex-direction: row;
-    width: 70%;
     margin: auto;
     color: #d2d2d2;
     border-width:2px;
@@ -69,3 +75,14 @@
 Button{
     margin-left: 30px;
 }
+
+.back {
+    position: fixed;
+    bottom: 150px;
+    right: 70px;
+    font-size: 20px;
+  }
+
+  .back:hover{
+    color:rgb(93, 184, 226)
+  }
