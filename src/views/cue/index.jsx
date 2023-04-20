@@ -1,6 +1,7 @@
 import { Button, List, Select } from "antd";
 import React, { useState } from "react";
 import styles from "./index.module.scss";
+import http from "../../utils/http";
 
 //脚本
 //回到顶部
@@ -37,22 +38,24 @@ export default function Cue() {
       goodId: "769498",
     },
   ];
-  const type=[ {
-    value: "all",
-    label: "全部",
-  },
-  {
-    value: "knife",
-    label: "匕首",
-  },
-  {
-    value: "rifle",
-    label: "步枪",
-  },
-  {
-    value: "Printing",
-    label: "印花",
-  },]
+  const type = [
+    {
+      value: "all",
+      label: "全部",
+    },
+    {
+      value: "knife",
+      label: "匕首",
+    },
+    {
+      value: "rifle",
+      label: "步枪",
+    },
+    {
+      value: "Printing",
+      label: "印花",
+    },
+  ];
 
   const [selectValue, setSelectValue] = useState(""); // 定义一个状态变量存储下拉框的选择值
   const [data, setData] = useState(goods); // 将商品信息列表与状态变量 data 绑定
@@ -85,15 +88,17 @@ export default function Cue() {
         />
       </div>
       {/* <div className={styles.middle}> */}
-        <List
-          dataSource={data}
-          renderItem={(item) => (
-            <List.Item key={item.goodId}>
-              <Good item={item} />
-            </List.Item>
-          )}
-        />
-        <div className={styles.back} onClick={handleScrollTop}>top</div>
+      <List
+        dataSource={data}
+        renderItem={(item) => (
+          <List.Item key={item.goodId}>
+            <Good item={item} />
+          </List.Item>
+        )}
+      />
+      <div className={styles.back} onClick={handleScrollTop}>
+        top
+      </div>
       {/* </div> */}
     </div>
   );
@@ -101,6 +106,7 @@ export default function Cue() {
 
 const Good = (props) => {
   const { item } = props;
+  const [price, setPrice] = useState(null);
 
   return (
     <div className={styles.itemStyle}>
@@ -113,9 +119,13 @@ const Good = (props) => {
           <div className={styles.low_price}>
             <div>
               <span>当前最低价:</span>
-              <label style={{ display: "inline-block", width: "40px" }}></label>
+              <label style={{ display: "inline-block", width: "40px" }}>
+                {price}
+              </label>
             </div>
-            <Button size="small">查找</Button>
+            <Button size="small" onClick={() => getPrice(item.goodId)}>
+              查找
+            </Button>
           </div>
           <div className={styles.target_price}>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -125,7 +135,7 @@ const Good = (props) => {
                 style={{ width: "55px", fontSize: "18px" }}
               ></input>
             </div>
-            <Button id="jiaoben" size="small" >
+            <Button id="jiaoben" size="small">
               开始
             </Button>
           </div>
@@ -133,4 +143,43 @@ const Good = (props) => {
       </div>
     </div>
   );
+};
+
+const getPrice = (goodId) => {
+  // try {
+  //   const ret = await http.get(
+  //     'https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id='+goodId+'&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_='+new Date().getTime(),
+  //     {},{headers: {Referer:"https://buff.163.com/goods/"+goodId}}
+  //   );
+  //   console.log(ret);
+  //   // setPrice(ret.data.items[0].price); // 在异步操作完成后更新商品价格状态变量 price 的值
+  // } catch (error) {
+  //   console.error(error);
+  // }
+  // fetch（url,method,headers） 浏览器都支持 第一个参数是url 第二个是方法 第三个是头部信息（用户的令牌，没有不用写）
+  fetch(
+    "https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=" +
+      goodId +
+      "&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=" +
+      new Date().getTime(),
+    {
+      method: "get",
+      headers: {
+        Referer: "https://buff.163.com/goods/" + goodId,
+      },
+    }
+  )
+    .then(function (res, err) {
+      if (res.ok) {
+        res.json().then(function (obj) {
+          // 这样数据就转换成json格式的了
+          // setPrice(obj.data.items[0].price);
+          console.log(obj);
+        });
+      }
+    })
+
+    .catch(function (error) {
+      console.log("Request failed", error);
+    });
 };
