@@ -67,7 +67,10 @@ export default function Cue() {
     );
   };
 
-  
+  const handleScrollTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div>
       <div className={styles.top_select} id="top">
@@ -90,7 +93,7 @@ export default function Cue() {
             </List.Item>
           )}
         />
-        <div className={styles.back} >top</div>
+        <div className={styles.back} onClick={handleScrollTop}>top</div>
       {/* </div> */}
     </div>
   );
@@ -122,7 +125,7 @@ const Good = (props) => {
                 style={{ width: "55px", fontSize: "18px" }}
               ></input>
             </div>
-            <Button id="jiaoben" size="small">
+            <Button id="jiaoben" size="small" >
               开始
             </Button>
           </div>
