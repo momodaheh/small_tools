@@ -1,7 +1,10 @@
 
-  
   .center{
-    height:calc(100vh - 55px);
     display: flex;
     flex-direction: column;
+    background-image: url(../../../src/assets/img/Bg2.jpg);
+    background-position: center center;  /* 设置背景图片居中 */
+    background-repeat: no-repeat;        /* 禁止背景图片重复 */
+    background-size: cover;     
+    
   }

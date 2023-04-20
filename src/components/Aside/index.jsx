@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 export default function Aside() {
   const navigate = useNavigate();
@@ -8,8 +8,7 @@ export default function Aside() {
     navigate(value)
   }
   return (
-    <div>
-      <div className={styles.menu}>
+      <div className={styles.menu} id="menu">
         {menuitems.map((item, index) => {
           return (
             <div className={styles.menuitem} key={index}>
@@ -18,14 +17,14 @@ export default function Aside() {
           );
         })}
       </div>
-    </div>
+
   );
 }
 
 const menuitems = [
   {
     name: "buff低价提醒",
-    value: "/home/page",
+    value: "/home/cue",
   },
   {
     name: "自动生成图标",

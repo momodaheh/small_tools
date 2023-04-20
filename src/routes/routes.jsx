@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import Page from "../views/page";
+import Cue from "../views/cue";
 import Home from "../views/home";
 
 // 路由表
@@ -14,8 +14,8 @@ const routes = [
     element: <Home />,
     children: [
       {
-        path: "page",
-        element: <Page />,
+        path: "cue",
+        element: <Cue />,
       },
     ],
   },
