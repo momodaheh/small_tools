@@ -25,13 +25,17 @@ const menuitems = [
   {
     name: "buff低价提醒",
     value: "/home/cue",
-  },
-  {
-    name: "自动生成图标",
-    value: 2,
+  },{
+    name: "天气预报",
+    value: "/home/weather",
   },
   {
     name: "以撒的结合重生图层攻略",
     value: 3,
   },
+  {
+    name: "自动生成图标",
+    value: 4,
+  },
+  
 ];

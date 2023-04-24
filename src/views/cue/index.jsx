@@ -107,6 +107,46 @@ export default function Cue() {
 const Good = (props) => {
   const { item } = props;
   const [price, setPrice] = useState(null);
+  const getPrice =  (goodId) => {
+    // try {
+    //   const ret = await http.get(
+    //     'https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id='+goodId+'&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_='+new Date().getTime(),
+    //   );
+    //   console.log(ret);
+    //   // setPrice(ret.data.items[0].price); // 在异步操作完成后更新商品价格状态变量 price 的值
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    // fetch（url,method,headers） 浏览器都支持 第一个参数是url 第二个是方法 第三个是头部信息（用户的令牌，没有不用写）
+    fetch(
+      "https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=" +
+        goodId +
+        "&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=" +
+        new Date().getTime(),
+      {
+        method: "get",
+        headers:{
+           'Referer': "https://buff.163.com/goods/" + goodId,
+        }
+       
+
+      }
+    )
+    
+      .then(function (res, err) {
+        if (res.ok) {
+          res.json().then(function (obj) {
+            // 这样数据就转换成json格式的了
+            setPrice(obj.data.items[0].price);
+            console.log(obj);
+          });
+        }
+      })
+
+      .catch(function (error) {
+        console.log("Request failed", error);
+      });
+  };
 
   return (
     <div className={styles.itemStyle}>
@@ -143,43 +183,4 @@ const Good = (props) => {
       </div>
     </div>
   );
-};
-
-const getPrice = (goodId) => {
-  // try {
-  //   const ret = await http.get(
-  //     'https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id='+goodId+'&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_='+new Date().getTime(),
-  //     {},{headers: {Referer:"https://buff.163.com/goods/"+goodId}}
-  //   );
-  //   console.log(ret);
-  //   // setPrice(ret.data.items[0].price); // 在异步操作完成后更新商品价格状态变量 price 的值
-  // } catch (error) {
-  //   console.error(error);
-  // }
-  // fetch（url,method,headers） 浏览器都支持 第一个参数是url 第二个是方法 第三个是头部信息（用户的令牌，没有不用写）
-  fetch(
-    "https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id=" +
-      goodId +
-      "&page_num=1&sort_by=default&mode=&allow_tradable_cooldown=1&_=" +
-      new Date().getTime(),
-    {
-      method: "get",
-      headers: {
-        Referer: "https://buff.163.com/goods/" + goodId,
-      },
-    }
-  )
-    .then(function (res, err) {
-      if (res.ok) {
-        res.json().then(function (obj) {
-          // 这样数据就转换成json格式的了
-          // setPrice(obj.data.items[0].price);
-          console.log(obj);
-        });
-      }
-    })
-
-    .catch(function (error) {
-      console.log("Request failed", error);
-    });
 };
