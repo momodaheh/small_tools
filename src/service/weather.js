@@ -5,3 +5,7 @@ export const get_Data = async(city) => {
     return ret
 }
 
+export const get_now_Data = async(city) =>{
+    const ret = await http.get('https://api.seniverse.com/v3/weather/now.json?key=SHNeyyo1Ab9YKrFDj&location='+city+'&language=zh-Hans&unit=c')
+    return ret
+} 

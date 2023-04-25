@@ -12,3 +12,108 @@
     font-size: 22px;
     font-weight: bold;
 }
+
+.middle{
+    width:75%;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    background-image: url(../../assets/img/weather_bg.jpg);
+    background-position: center center;  /* 设置背景图片居中 */
+    background-repeat: no-repeat;        /* 禁止背景图片重复 */
+    background-size: cover; 
+    height:320px;
+    padding: 10px;
+}
+
+.today{
+    min-width: 300px;
+    border-left-width: 1px;
+    border-right-style:solid;
+    border-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    
+
+   
+}
+
+.today_top{
+        width: 100%;
+        height: 60px;
+        font-size: 22px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        div{ 
+            display: flex;
+            align-items: center;
+            margin-right: 5px;
+        }
+
+        img{
+            height: 40px;
+            width: 40px;
+            opacity: 0.4;
+        }
+    }
+
+.today_center{
+    width: 100%;
+    height: 120px;
+    margin: auto;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+   .wen{
+    font-size: 80px;
+   }
+   .danwei{
+    margin-top: 15px;
+   }
+}
+
+.today_bottom{
+    width: 100%;
+    height: 120px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 40px;
+    img{
+        height: 90px;
+        width: 120px;
+    }
+}
+.list_box{
+    height: 320px;
+    width: 470px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item{
+    width: 150px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    border-left-width: 1px;
+    border-right-style:solid;
+    border-color: rgba(255, 255, 255, 0.1);
+    font-size: 20px;
+
+    *{
+        margin-top: 10px;
+    }
+    img{
+        width: 65px;
+        height: 65px;
+    }
+}
