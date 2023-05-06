@@ -22,12 +22,12 @@
     background-position: center center;  /* 设置背景图片居中 */
     background-repeat: no-repeat;        /* 禁止背景图片重复 */
     background-size: cover; 
-    height:320px;
+    height:340px;
     padding: 10px;
 }
 
 .today{
-    min-width: 300px;
+    min-width: 320px;
     border-left-width: 1px;
     border-right-style:solid;
     border-color: rgba(255, 255, 255, 0.1);
@@ -86,7 +86,7 @@
     font-size: 40px;
     img{
         height: 90px;
-        width: 120px;
+        width: 100px;
     }
 }
 .list_box{
@@ -113,7 +113,27 @@
         margin-top: 10px;
     }
     img{
-        width: 65px;
-        height: 65px;
+        width: 57px;
+        height: 57px;
     }
 }
+
+.map_box{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.map{
+    width: 797px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+}
+

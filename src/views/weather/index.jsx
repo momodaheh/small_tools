@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import { get_Data, get_now_Data } from "../../service/weather";
 import { Empty, Select, message } from "antd";
+import * as echarts from 'echarts';
+import { MapChart } from 'echarts/charts';
+import zhejiang from "../../assets/map/zhejiang.json";
 import loci from "../../assets/img/1.png";
 import ti from "../../assets/img/2.png";
 
@@ -26,6 +29,7 @@ export default function Weather() {
         message.error("获取实时数据失败");
       }
     });
+
   }, [city]);
 
   const Citys = [
@@ -47,7 +51,7 @@ export default function Weather() {
   };
 
   return (
-    <div>
+    <div className={styles.box}>
       <div className={styles.top_select} id="top">
         <span>天气预报</span>
         <Select
@@ -59,6 +63,8 @@ export default function Weather() {
           options={Citys}
         />
       </div>
+      <div className={styles.map_box}><Province setCity={setCity}/></div>
+      
       <div className={styles.middle}>
         {nowdata ? (
           <div className={styles.today}>
@@ -92,9 +98,9 @@ export default function Weather() {
         )}
         <div className={styles.list_box}>
           {data ? (
-            data.map((item, index) => 
-              <WeatherItem item={item} key={index} type={index}/>
-            )
+            data.map((item, index) => (
+              <WeatherItem item={item} key={index} type={index} />
+            ))
           ) : (
             <div>
               <Empty description="暂无后三日数据，请刷新" />
@@ -107,18 +113,12 @@ export default function Weather() {
 }
 
 const WeatherItem = (props) => {
-  const { item  ,type} = props;
+  const { item, type } = props;
   return (
     <div className={styles.item}>
-      {type === 0 &&
-        <span>今天</span>
-      }
-      {type === 1 &&
-        <span>明天</span>
-      }
-      {type === 2 &&
-        <span>后天</span>
-      }
+      {type === 0 && <span>今天</span>}
+      {type === 1 && <span>明天</span>}
+      {type === 2 && <span>后天</span>}
       <span>{item.date.substring(5, 10)}</span>
       <img src={`/weathers/${item.code_day}@2x.png`} alt={item.code_day} />
       <img src={`/weathers/${item.code_night}@2x.png`} alt={item.code_night} />
@@ -135,4 +135,62 @@ const WeatherItem = (props) => {
       <span>{item.wind_direction}</span>
     </div>
   );
+};
+
+const Province  = ({setCity}) => {
+  useEffect(() =>{
+  echarts.use([MapChart]);
+  let myChat = echarts.init(document.getElementById("map"));
+
+  let name = "zhejiang";
+  let data = zhejiang;
+  echarts.registerMap(name, data);
+  let option = {
+    backgroundColor: "#534d46",
+    title: {
+      top: 20,
+      text: "浙江省",
+      subtext: "",
+      x: "center",
+      textStyle: {
+        color: "#000",
+      },
+    },
+    geo: {
+      type: "map",
+      map: name, //'浙江'
+      roam: false,
+      geoIndex: 1,
+      zoom: 1.1, //地图的比例
+      label: {
+        normal: {
+          show: true,
+          textStyle: {
+            color: "#000000", //字体颜色
+          },
+        },
+        emphasis: {
+          textStyle: {
+            color: "#000000", //选中后的字体颜色
+          },
+        },
+      },
+      itemStyle: {
+        normal: {
+          areaColor: "#EEEEEE",
+          borderColor: "#8b8b8b",
+        },
+        emphasis: {
+          areaColor: "#ffffff",
+        },
+      },
+    },
+  };
+  myChat.on('click',(e)=>{
+    setCity(e.name);
+  })
+  myChat.setOption(option);
+  },[])
+  return <div id="map" className={styles.map}></div>
+  
 };
