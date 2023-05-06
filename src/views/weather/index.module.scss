@@ -24,6 +24,8 @@
     background-size: cover; 
     height:340px;
     padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .today{
@@ -99,7 +101,7 @@
 
 .item{
     width: 150px;
-    height: 320px;
+    height: 340px;
     display: flex;
     flex-direction: column;
     align-items: center;

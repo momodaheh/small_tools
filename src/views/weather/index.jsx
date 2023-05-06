@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import { get_Data, get_now_Data } from "../../service/weather";
-import { Empty, Select, message } from "antd";
+import { Empty, message } from "antd";
 import * as echarts from 'echarts';
 import { MapChart } from 'echarts/charts';
-import zhejiang from "../../assets/map/zhejiang.json";
+// import zhejiang from "../../assets/map/zhejiang.json";
 import loci from "../../assets/img/1.png";
 import ti from "../../assets/img/2.png";
 
 export default function Weather() {
-  const [city, setCity] = useState("杭州");
+  const [city, setCity] = useState("北京");
   const [data, setData] = useState([]);
   const [nowdata, setNowdata] = useState();
   useEffect(() => {
     get_Data(city).then((ret) => {
       if (ret != null && ret.status === 200) {
         setData(ret.data.results[0].daily);
-        console.log(ret.data.results[0].daily);
+        // console.log(ret.data.results[0].daily);
       } else {
         message.error("获取数据失败");
       }
@@ -24,7 +24,8 @@ export default function Weather() {
     get_now_Data(city).then((ret) => {
       if (ret != null && ret.status === 200) {
         setNowdata(ret.data.results[0]);
-        console.log(ret.data.results[0]);
+        // console.log(ret.data.results[0]);
+        console.log(city);
       } else {
         message.error("获取实时数据失败");
       }
@@ -32,36 +33,36 @@ export default function Weather() {
 
   }, [city]);
 
-  const Citys = [
-    {
-      label: "杭州",
-      value: "hangzhou",
-    },
-    {
-      label: "上海",
-      value: "shanghai",
-    },
-    {
-      label: "北京",
-      value: "北京",
-    },
-  ];
-  const handleChange = (value) => {
-    setCity(value);
-  };
+  // const Citys = [
+  //   {
+  //     label: "杭州",
+  //     value: "hangzhou",
+  //   },
+  //   {
+  //     label: "上海",
+  //     value: "shanghai",
+  //   },
+  //   {
+  //     label: "北京",
+  //     value: "北京",
+  //   },
+  // ];
+  // const handleChange = (value) => {
+  //   setCity(value);
+  // };
 
   return (
     <div className={styles.box}>
       <div className={styles.top_select} id="top">
         <span>天气预报</span>
-        <Select
+        {/* <Select
           defaultValue="hangzhou"
           style={{
             width: 120,
           }}
           onChange={handleChange}
           options={Citys}
-        />
+        /> */}
       </div>
       <div className={styles.map_box}><Province setCity={setCity}/></div>
       
@@ -138,28 +139,31 @@ const WeatherItem = (props) => {
 };
 
 const Province  = ({setCity}) => {
+
+  const [mapName , setmapName]=useState("china")
   useEffect(() =>{
   echarts.use([MapChart]);
   let myChat = echarts.init(document.getElementById("map"));
 
-  let name = "zhejiang";
-  let data = zhejiang;
+  let name = mapName;
+  // let data = zhejiang;
+  const data =require('../../assets/map/'+mapName+'.json')
   echarts.registerMap(name, data);
   let option = {
     backgroundColor: "#534d46",
-    title: {
-      top: 20,
-      text: "浙江省",
-      subtext: "",
-      x: "center",
-      textStyle: {
-        color: "#000",
-      },
-    },
+    // title: { //地图标题
+    //   top: 20,
+    //   text: "浙江省",
+    //   subtext: "",
+    //   x: "center",
+    //   textStyle: {
+    //     color: "#000",
+    //   },
+    // },
     geo: {
       type: "map",
       map: name, //'浙江'
-      roam: false,
+      roam: true,
       geoIndex: 1,
       zoom: 1.1, //地图的比例
       label: {
@@ -187,10 +191,11 @@ const Province  = ({setCity}) => {
     },
   };
   myChat.on('click',(e)=>{
-    setCity(e.name);
+    mapName ==="china"?(setmapName(e.name)):(setCity(e.name))
+    console.log(mapName);
   })
   myChat.setOption(option);
-  },[])
+  },[mapName])
   return <div id="map" className={styles.map}></div>
   
 };
