@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import styles from "./index.module.scss";
 import { get_Data, get_now_Data } from "../../service/weather";
-import { Empty, message } from "antd";
+import { Button, Empty, message } from "antd";
 import * as echarts from 'echarts';
 import { MapChart } from 'echarts/charts';
 // import zhejiang from "../../assets/map/zhejiang.json";
@@ -10,6 +10,7 @@ import ti from "../../assets/img/2.png";
 
 export default function Weather() {
   const [city, setCity] = useState("北京");
+  const [mapName , setmapName]=useState("china")
   const [data, setData] = useState([]);
   const [nowdata, setNowdata] = useState();
   useEffect(() => {
@@ -32,25 +33,9 @@ export default function Weather() {
     });
 
   }, [city]);
-
-  // const Citys = [
-  //   {
-  //     label: "杭州",
-  //     value: "hangzhou",
-  //   },
-  //   {
-  //     label: "上海",
-  //     value: "shanghai",
-  //   },
-  //   {
-  //     label: "北京",
-  //     value: "北京",
-  //   },
-  // ];
-  // const handleChange = (value) => {
-  //   setCity(value);
-  // };
-
+   function back(){
+    setmapName("china")
+  }
   return (
     <div className={styles.box}>
       <div className={styles.top_select} id="top">
@@ -63,8 +48,10 @@ export default function Weather() {
           onChange={handleChange}
           options={Citys}
         /> */}
+        <Button onClick={back} >返回</Button>
       </div>
-      <div className={styles.map_box}><Province setCity={setCity}/></div>
+      <div className={styles.map_box}>
+        <Province setCity={setCity} setmapName={setmapName} mapName={mapName} /></div>
       
       <div className={styles.middle}>
         {nowdata ? (
@@ -138,9 +125,9 @@ const WeatherItem = (props) => {
   );
 };
 
-const Province  = ({setCity}) => {
+const Province  = ({setCity,setmapName,mapName}) => {
 
-  const [mapName , setmapName]=useState("china")
+  
   useEffect(() =>{
   echarts.use([MapChart]);
   let myChat = echarts.init(document.getElementById("map"));
@@ -165,7 +152,7 @@ const Province  = ({setCity}) => {
       map: name, //'浙江'
       roam: true,
       geoIndex: 1,
-      zoom: 1.1, //地图的比例
+      zoom: 1.8, //地图的比例
       label: {
         normal: {
           show: true,
