@@ -25,7 +25,7 @@ export default function Weather() {
       if (ret != null && ret.status === 200) {
         setNowdata(ret.data.results[0]);
         // console.log(ret.data.results[0]);
-        console.log(city);
+        // console.log(city);
       } else {
         message.error("获取实时数据失败");
       }
@@ -145,21 +145,21 @@ const Province  = ({setCity}) => {
   echarts.use([MapChart]);
   let myChat = echarts.init(document.getElementById("map"));
 
-  let name = mapName;
+  const name = mapName;
   // let data = zhejiang;
   const data =require('../../assets/map/'+mapName+'.json')
   echarts.registerMap(name, data);
   let option = {
     backgroundColor: "#534d46",
-    // title: { //地图标题
-    //   top: 20,
-    //   text: "浙江省",
-    //   subtext: "",
-    //   x: "center",
-    //   textStyle: {
-    //     color: "#000",
-    //   },
-    // },
+    title: { //地图标题
+      top: 20,
+      text: mapName,
+      subtext: "",
+      x: 10,
+      textStyle: {
+        color: "#000",
+      },
+    },
     geo: {
       type: "map",
       map: name, //'浙江'
@@ -191,8 +191,9 @@ const Province  = ({setCity}) => {
     },
   };
   myChat.on('click',(e)=>{
-    mapName ==="china"?(setmapName(e.name)):(setCity(e.name))
-    console.log(mapName);
+    e.name.includes('省')||e.name.includes('自治区')||
+    e.name.includes('北京市')||e.name.includes('天津市')||e.name.includes('上海市')||e.name.includes('重庆市')
+    ?(setmapName(e.name)):(setCity(e.name))
   })
   myChat.setOption(option);
   },[mapName])
